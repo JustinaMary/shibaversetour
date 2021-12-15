@@ -18,7 +18,10 @@
 	<meta name="theme-color" content="#FFFFFF"/>
     <script src="lib/tdvplayer.js?v=1639548782286"></script>
     <script src="script.js?v=1639548782286"></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"
+    integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.min.js"
+    crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <script type="text/javascript">
         var tour;
         var devicesUrl = {"general":"script_general.js?v=1639548782286"};
@@ -315,7 +318,7 @@
     
     <script>
         function changeMediaFile() {
-            let mediaUrl =  'https://images.cointelegraph.com/images/1434_aHR0cHM6Ly9zMy5jb2ludGVsZWdyYXBoLmNvbS9zdG9yYWdlL3VwbG9hZHMvdmlldy9iNWZjNzJjOTEwNmJlMGFlMTRkZTYxNDJiMTE2Yjc4NS5qcGc=.jpg';
+            let mediaUrl =  $.cookie("mediaUrl");
             if(mediaUrl.includes('youtube')) {
                 const splitUrl = mediaUrl.split('=');
                 mediaUrl = 'https://www.youtube.com/embed/'+splitUrl[1];
