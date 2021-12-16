@@ -5,22 +5,15 @@
 ### Description
 
 ### Title
-tour.name = Shibaverse Tour
+tour.name = Untitled 1
 
 ## Media
 
 ### Title
-panorama_A0FA41B2_A948_7867_41B1_01FFEC3C81D9.label = panorama-hall
-panorama_A7FE1973_A958_A8E5_41DC_2413AB9FF1C5.label = panorama-kitchen
 panorama_B955CAC3_A958_6825_41DC_58432E63CB57.label = panorama-bedroom
 video_A68371A2_A94F_9867_41CF_8DE4011B4983.label = forest_trees_pelister_national_park_1090
 
 ## Hotspot
-
-### Tooltip
-HotspotPanoramaOverlayArea_A84550BF_B92D_EFCE_41D5_515D73071664.toolTip = Enter into hall
-HotspotPanoramaOverlayArea_A8795DA5_B915_B1F2_41E0_8803675A5E35.toolTip = Enter into kitchen
-HotspotPanoramaOverlayArea_A8C5AC67_B914_577E_41C2_2F04E561331C.toolTip = Enter into bedroom
 
 ### URL
 overlay_B3E9C8F5_BCCA_A996_41C7_FA79CB0DE0BE.url = https://publish.one37pm.net/wp-content/uploads/2021/04/mobile_hero_veve_1080x1168.jpg
