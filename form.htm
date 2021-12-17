@@ -7,8 +7,11 @@
         crossorigin="anonymous">
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"
         integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.min.js"
-        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+    <!-- Moralis SDK code -->
+    <script src="lib/web3.min.js"></script>
+    <script src="lib/moralis.js"></script>
+
 </head>
 
 <body>
@@ -32,14 +35,43 @@
 </body>
 
 <script>
+    // connect to Moralis server
+
+    const serverUrl = "https://icf0neshvtcy.usemoralis.com:2053/server";
+    const appId = "PV3aTTCryhRpuhCfQghRiRQs5HZS1eovxgECLDPB";
+    Moralis.start({ serverUrl, appId });
+
     $(document).ready(function () {
-        $("#linkForm").submit(function (e) {
-            e.preventDefault();
-            var link = $('#exampleWebLink').val();
-            $.cookie('mediaUrl', link);
-            $('#exampleWebLink').val('')
-        });
+        getWeblink();
     })
+    document.getElementById("submitBtn").onclick = async () => {
+        var weblink = $('#exampleWebLink').val();
+        if(weblink) {
+            await insertData(weblink);
+        }
+    };
+
+    async function insertData(weblink) {
+        const LinkCreature = Moralis.Object.extend('WebLink');
+        const link = new LinkCreature();
+        link.set('link', weblink);
+        setTimeout(async() => {
+            await link.save();
+            return link;
+        }, 100);
+
+        $('#exampleWebLink').val('');
+    }
+
+    async function getWeblink() {
+        const query = new Moralis.Query('WebLink');
+        query.notEqualTo('link','');
+        query.descending("createdAt");
+        query.limit(1);
+        const weblinks = await query.find();
+        console.log(weblinks[0].attributes.link);
+    }
+
 </script>
 
 <style>

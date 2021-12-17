@@ -29,8 +29,9 @@
     <script src="script.js?v=1639625851125"></script>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"
         integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
-    <script src="lib/jquery.cookie.min.js"
-        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <!-- Moralis SDK code -->
+    <script src="lib/web3.min.js"></script>
+    <script src="lib/moralis.js"></script>
     <script type="text/javascript">
         var tour;
         var devicesUrl = { "general": "script_general.js?v=1639625851125" };
@@ -342,16 +343,27 @@
     </style>
 
     <script>
-        function changeMediaFile() {
-            let mediaUrl = $.cookie("mediaUrl");
-            if (mediaUrl.includes('youtube')) {
-                const splitUrl = mediaUrl.split('=');
-                mediaUrl = 'https://www.youtube.com/embed/' + splitUrl[1];
-                setTimeout(() => {
-                    $('.ytp-large-play-button').trigger('click');
-                }, 1000);
-            }
-            window.blazeIT.getHotspot('web_hotspot').set('url', mediaUrl);
+        const serverUrl = "https://icf0neshvtcy.usemoralis.com:2053/server";
+        const appId = "PV3aTTCryhRpuhCfQghRiRQs5HZS1eovxgECLDPB";
+        Moralis.start({ serverUrl, appId });
+
+        async function changeMediaFile() {
+            setInterval(async () => {
+                const query = new Moralis.Query('WebLink');
+                query.notEqualTo('link', '');
+                query.descending("createdAt");
+                query.limit(1);
+                const weblinks = await query.find();
+                let mediaUrl = weblinks[0].attributes.link;
+                if (mediaUrl.includes('youtube')) {
+                    const splitUrl = mediaUrl.split('=');
+                    mediaUrl = 'https://www.youtube.com/embed/' + splitUrl[1];
+                    setTimeout(() => {
+                        $('.ytp-large-play-button').trigger('click');
+                    }, 1000);
+                }
+                window.blazeIT.getHotspot('web_hotspot').set('url', mediaUrl);
+            }, 3000);
         }
     </script>
 
